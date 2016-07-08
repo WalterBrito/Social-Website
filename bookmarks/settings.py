@@ -37,7 +37,7 @@ INSTALLED_APPS = (
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
-    'django.contrib.staticfiles',    
+    'django.contrib.staticfiles',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -102,11 +102,18 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
+# Send email
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackends'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'django.framework001@gmail.com'
+EMAIL_HOST_PASSWORD = 'django001'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+
+
 from django.core.urlresolvers import reverse_lazy
 
-
+# Configuration SMTP Server
 LOGIN_REDIRECT_URL = reverse_lazy('dashboard')
 LOGIN_URL = reverse_lazy('login')
 LOGOUT_URL = reverse_lazy('logout')
-
-
