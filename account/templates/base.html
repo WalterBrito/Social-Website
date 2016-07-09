@@ -23,7 +23,18 @@
             <a href="{% url "login" %}">Log-in</a>
         {% endif %}
         </span>
+        
     </div>
+        {% if messages %}
+            <ul class="messages">
+               {% for message in messages %}
+                  <li class="{{ message.tags }}">
+                     {{ message|safe }}
+                        <a href="#" class="close">✖</a>
+                  </li>
+               {% endfor %}
+            </ul>
+         {% endif %}
     
     {% if messages %}
         <ul class="messages">
@@ -40,5 +51,32 @@
         {% block content %}
         {% endblock %}
     </div>
+
+       <!-- Facebook APP Configuration -->
+      <script>
+       window.fbAsyncInit = function() {
+         FB.init({
+            appId      : '280106315680498',
+            xfbml      : true,
+            version    : 'v2.6'
+          });
+      };
+
+      (function(d, s, id){
+         var js, fjs = d.getElementsByTagName(s)[0];
+          if (d.getElementById(id)) {return;}
+          js = d.createElement(s); js.id = id;
+          js.src = "//connect.facebook.net/en_US/sdk.js";
+          fjs.parentNode.insertBefore(js, fjs);
+      }(document, 'script', 'facebook-jssdk')); 
+    </script> 
+
+    <!-- Facebook like button -->
+   <div
+      class="fb-like"
+      data-share="true"
+      data-width="450"
+      data-show-faces="true">
+   </div>
 </body>
 </html>

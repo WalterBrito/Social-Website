@@ -38,6 +38,7 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'social.apps.django_app.default',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -105,7 +106,7 @@ STATIC_URL = '/static/'
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
 
-# Send email
+# Configuration SMTP Server
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackends'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_HOST_USER = 'django.framework001@gmail.com'
@@ -113,10 +114,20 @@ EMAIL_HOST_PASSWORD = 'django001'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 
-
 from django.core.urlresolvers import reverse_lazy
 
-# Configuration SMTP Server
 LOGIN_REDIRECT_URL = reverse_lazy('dashboard')
 LOGIN_URL = reverse_lazy('login')
 LOGOUT_URL = reverse_lazy('logout')
+
+# python-social-auth settings
+AUTHENTICATION_BACKENDS = (
+    'social.backends.facebook.Facebook2OAuth2',
+
+
+    'django.contrib.auth.backends.ModelBackend',
+    'account.authentication.EmailAuthBackend',
+)
+
+SOCIAL_AUTH_FACEBOOK_KEY =  '280106315680498'                    # Facebook App ID
+SOCIAL_AUTH_FACEBOOK_SECRET = 'e8d6c75999d2697f5e290da07a66e28b' # Facebook App Secret
