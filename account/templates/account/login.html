@@ -3,7 +3,8 @@
 {% block title %}Log-in{% endblock %}
 
 {% block content %}
-	<h1>Log-in</h1>
+	<h1>Log-in
+	</h1>
 	<p>Please, use the following form to log-in. If you don't have an
 	account <a href="{% url "register" %}">register here</a></p>
 	<form action="." method="post">
@@ -11,10 +12,4 @@
 		{% csrf_token %}
 		<p><input type="submit" value="Log-in"></p>
 	</form>
-	<div class="social">	
-		<ul>
-			<li class="facebook"><a href="{% url "social:begin" "facebook"
-			%}">Sign in with Facebook</a></li>
-		</ul>
-	</div>
 {% endblock %}
