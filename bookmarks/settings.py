@@ -32,10 +32,7 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = (
     'account',
-<<<<<<< HEAD
     'images',
-=======
->>>>>>> 302ba3ab1b365eb2b58599fc9fffca7cde6a0582
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
