@@ -15,15 +15,15 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Image',
             fields=[
-                ('id', models.AutoField(auto_created=True, verbose_name='ID', primary_key=True, serialize=False)),
+                ('id', models.AutoField(auto_created=True, serialize=False, primary_key=True, verbose_name='ID')),
                 ('title', models.CharField(max_length=200)),
                 ('slug', models.SlugField(max_length=200, blank=True)),
                 ('url', models.URLField()),
                 ('image', models.ImageField(upload_to='images/%Y/%m/%d')),
                 ('description', models.TextField(blank=True)),
                 ('created', models.DateTimeField(auto_now_add=True, db_index=True)),
-                ('user', models.ForeignKey(to=settings.AUTH_USER_MODEL, related_name='images_created')),
-                ('users_like', models.ManyToManyField(to=settings.AUTH_USER_MODEL, blank=True, related_name='images_liked')),
+                ('user', models.ForeignKey(related_name='images_created', to=settings.AUTH_USER_MODEL)),
+                ('users_like', models.ManyToManyField(related_name='images_liked', to=settings.AUTH_USER_MODEL, blank=True)),
             ],
         ),
     ]
