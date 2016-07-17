@@ -33,6 +33,7 @@ ALLOWED_HOSTS = []
 INSTALLED_APPS = (
     'account',
     'images',
+    'actions',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -129,17 +130,20 @@ AUTHENTICATION_BACKENDS = (
     'social.backends.google.GoogleOAuth2',
 
     'django.contrib.auth.backends.ModelBackend',
-    'account.authentication.EmailAuthBackend',  
+    'account.authentication.EmailAuthBackend',
 )
 
-SOCIAL_AUTH_FACEBOOK_KEY =  '1740562352885953'                    # Facebook App ID
-SOCIAL_AUTH_FACEBOOK_SECRET = '5315f06e6a9132e7c6a31f867fa3af5c' # Facebook App Secret
+SOCIAL_AUTH_FACEBOOK_KEY = '1740562352885953'                    # Facebook App ID
+SOCIAL_AUTH_FACEBOOK_SECRET = '5315f06e6a9132e7c6a31f867fa3af5c'  # Facebook App Secret
 
-SOCIAL_AUTH_TWITTER_KEY = 'Ia2xCII4byhUG6TXvHdLRxtGv' # Twitter Consumer Key
-SOCIAL_AUTH_TWITTER_SECRET = 'sfR8I1lcRU5qcqrxoYWZGjUFP2Cukp9oFWGuUCdgm0wK8gqbdm' # Twitter Consumer Secret
+SOCIAL_AUTH_TWITTER_KEY = 'Ia2xCII4byhUG6TXvHdLRxtGv'  # Twitter Consumer Key
+# Twitter Consumer Secret
+SOCIAL_AUTH_TWITTER_SECRET = 'sfR8I1lcRU5qcqrxoYWZGjUFP2Cukp9oFWGuUCdgm0wK8gqbdm'
 
-SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '356656155660-vl6c5attlu6359j4da2sd7kf53jdmiek.apps.googleusercontent.com' # Google Consumer Key
-SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = 'CgX4SPa4qxkXwhTY1j5Ht6Md"}}' # Google Consumer Secret
+# Google Consumer Key
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '356656155660-vl6c5attlu6359j4da2sd7kf53jdmiek.apps.googleusercontent.com'
+# Google Consumer Secret
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = 'CgX4SPa4qxkXwhTY1j5Ht6Md"}}'
 
 ABSOLUTE_URL_OVERRIDES = {
     'auth.user': lambda u: reverse_lazy('user_detail',
