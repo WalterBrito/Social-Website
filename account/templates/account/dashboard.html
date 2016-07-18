@@ -20,11 +20,17 @@
 	  password</a>.</p>
 
 	<!-- Facebook buttons --> 
-   <div
+   <!--<div
       class="fb-like"
       data-share="true"
       data-width="450"
       data-show-faces="true">
-   </div>
-   
+   </div>-->
+
+   <h2>What's happening</h2>
+   <div id="action-list">
+      {% for action in actions %}
+			{% include "actions/action/detail.html" %}
+		{% endfor %}
+	</div>
 {% endblock %}
