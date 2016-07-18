@@ -3,6 +3,7 @@ from django.conf import settings
 from django.utils.text import slugify
 from django.core.urlresolvers import reverse
 
+
 class Image(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL,
                              related_name='images_created')
@@ -14,6 +15,7 @@ class Image(models.Model):
     created = models.DateTimeField(auto_now_add=True, db_index=True)
     users_like = models.ManyToManyField(settings.AUTH_USER_MODEL,
                                         related_name='images_liked', blank=True)
+    total_likes = models.PositiveIntegerField(db_index=True, default=0)
 
     def __str__(self):
         return self.title
@@ -25,4 +27,3 @@ class Image(models.Model):
 
     def get_absolute_url(self):
         return reverse('images:detail', args=[self.id, self.slug])
-
