@@ -12,6 +12,12 @@ import redis
 from django.conf import settings
 
 
+# connect to redis
+r = redis.StrictRedis(host=settings.REDIS_HOST,
+                      port=settings.REDIS_PORT,
+                      db=settings.REDIS_DB)
+
+
 @login_required
 def image_create(request):
     if request.method == 'POST':
@@ -41,8 +47,10 @@ def image_create(request):
 
 def image_detail(request, id, slug):
     image = get_object_or_404(Image, id=id, slug=slug)
-    # imcrement total image views by 1
+    # increment total image views by 1
     total_views = r.incr('image:{}:views'.format(image.id))
+    # increment image ranking by 1
+    r.zincrby('image_ranking', image.id, 1)
     return render(request, 'images/image/detail.html',
                            {'section': 'images',
                             'image': image,
@@ -92,7 +100,14 @@ def image_list(request):
     return render(request, 'images/image/list.html',
                   {'section': 'images', 'images': images})
 
-# connect to redis
-r = redis.StrictRedis(host=settings.REDIS_HOST,
-                      port=settings.REDIS_PORT,
-                      db=settings.REDIS_DB)
+
+@login_required
+def image_ranking(request):
+    # get image ranking dictionary
+    image_ranking = r.zrange('image_ranking', 0, -1, desc=True)[:10]
+    image_ranking_ids = [int(id) for id in image_ranking]
+    # get most viewed images
+    most_viewed = list(Image.objects.filter(id__in=image_ranking_ids))
+    most_viewed.sort(key=lambda x: image_ranking_ids.index(x.id))
+    return render(request, 'images/image/ranking.html',
+                  {'section': 'images', 'most_viewed': most_viewed})
